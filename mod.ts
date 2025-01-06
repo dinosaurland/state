@@ -1,3 +1,13 @@
+/**
+ * Create a `State` object with an initial value.
+ * 
+ * @example 
+ * ```ts
+ * const state = new State(0);
+ * state.addListener(value => console.log(value));
+ * state.value = 1; // logs 1
+ * ```
+ */
 export class State<T> {
     private _listeners: Set<(value: T) => void> = new Set();
     protected _value: T;
@@ -60,6 +70,18 @@ export class State<T> {
     }
 }
 
+/**
+ * Disposale async iterator that yields the values of a `State` object.
+ * 
+ * @example
+ * ```ts
+ * const state = new State(0);
+ * using values = state.watch();
+ * for await (const value of values) {
+ *    console.log(value);
+ * }
+ * ```
+ */
 export class StateObserver<T> {
     private _watcher!: PromiseWithResolvers<T>;
 
