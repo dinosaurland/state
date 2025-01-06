@@ -10,8 +10,8 @@
  */
 export class State<T> {
     private _listeners: Set<(value: T) => void> = new Set();
-    protected _value: T;
-    protected _update(value: T) {
+    private _value: T;
+    private _update(value: T) {
         this._listeners.forEach(r => r(value));
     }
 
